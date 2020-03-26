@@ -3,6 +3,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public GameObject playButton;
+    public GameObject menuButton;
+    public GameObject saveButton;
     public GameObject playerShip;
     public GameObject enemySpawner;
     public GameObject GameOverGO;
@@ -32,12 +34,20 @@ public class GameManager : MonoBehaviour
                 GameTitleGO.SetActive(true);
                 // visible play button
                 playButton.SetActive(true);
+                // visible menu button
+                menuButton.SetActive(true);
+                // hide save button
+                saveButton.SetActive(false);
                 break;
             case GameManagerState.Gameplay:
                 // reset skor
                 scoreUITextGO.GetComponent<GameScore>().Score = 0;
                 // menyembunyikan play button pada state game play
                 playButton.SetActive(false);
+                // menyembunyikan menu button pada state game play
+                menuButton.SetActive(false);
+                // tampilkan save button
+                saveButton.SetActive(true);
                 // hide judul game
                 GameTitleGO.SetActive(false);
                 // mengubah player menjadi visible dan init nyawa player
@@ -53,6 +63,8 @@ public class GameManager : MonoBehaviour
                 // stop enemy spawner
                 enemySpawner.GetComponent<EnemySpawner>().UnscheduleEnemySpawner();
                 GameOverGO.SetActive(true);
+                // hide save button
+                saveButton.SetActive(false);
                 // ubah state game manager ke state opening setelah 8 detik
                 Invoke("ChangeToOpeningState", 8f);
                 break;
